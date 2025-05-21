@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hommage à Werenoi 🕊️</title>
+  <style>
+    body {
+      margin: 0; padding: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+      text-align: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .title {
+      margin-top: 30px;
+      font-size: 3rem;
+      text-shadow: 0 0 8px #fff;
+    }
+    .img-container {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin: 50px 20px;
+      flex-wrap: wrap;
+    }
+    .artist {
+      width: 300px;
+      background-color: rgba(34, 34, 34, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .artist:hover {
+      transform: scale(1.05);
+    }
+    .artist img {
+      width: 100%;
+      border-radius: 10px;
+      filter: drop-shadow(0 0 6px #000);
+    }
+    .artist h2 {
+      margin-top: 15px;
+      font-size: 1.5rem;
+    }
+    .artist p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+    .link {
+      margin-top: 10px;
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #e60000;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .link:hover {
+      background-color: #ff1a1a;
+    }
+    .rain {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .drop {
+      position: absolute;
+      bottom: 100%;
+      width: 2px;
+      height: 15px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+    .lightning {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      animation: lightningFlash 10s infinite;
+      opacity: 0;
+      background: white;
+      mix-blend-mode: screen;
+    }
+    @keyframes lightningFlash {
+      0%, 90%, 100% { opacity: 0; }
+      92%, 94%, 96% { opacity: 1; }
+      93%, 95%, 97% { opacity: 0; }
+    }
+    #start-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      background: rgba(0,0,0,0.8);
+      padding: 20px 40px;
+      border-radius: 20px;
+      cursor: pointer;
+      z-index: 10;
+      user-select: none;
+      text-shadow: 0 0 5px #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="start-message">Clique pour lancer la zik 🎵</div>
+
+  <div class="title">Repose en paix WeRenoi 🕊️</div>
+
+  <div class="img-container">
+    <div class="artist">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZQzYREy3ah4i5zsUIfp43yyJuHKQNHmG5pQ&s" alt="Werenoi" />
+      <h2>WeRenoi</h2>
+      <p>Ton art vivra à jamais dans nos cœurs ❤️‍🔥</p>
+      <a class="link" href="https://www.youtube.com/@werenoi93" target="_blank" rel="noopener noreferrer">Voir sa chaîne</a>
+    </div>
+
+    <div class="artist">
+      <img src="https://generations.fr/media/video/ven1-devoile-le-clip-de-peche-passion_680fa5b6660ea.jpg" alt="Ven1" />
+      <h2>Ven1</h2>
+      <p>La suite repose sur tes épaules, t’es prêt frérot 🔥</p>
+      <a class="link" href="https://www.youtube.com/channel/UCEy0G2tLuWRtaXVKzrkg0Sg" target="_blank" rel="noopener noreferrer">Voir sa chaîne</a>
+    </div>
+  </div>
+
+  <div class="rain"></div>
+  <div class="lightning"></div>
+
+  <audio id="bg-music" loop>
+    <source src="poney.mp3" type="audio/mpeg" />
+    Ton navigateur ne supporte pas la balise audio.
+  </audio>
+
+  <script>
+    const rainContainer = document.querySelector('.rain');
+    const nbDrops = 150;
+
+    for(let i=0; i < nbDrops; i++) {
+      const drop = document.createElement('div');
+      drop.classList.add('drop');
+      drop.style.left = Math.random() * 100 + 'vw';
+      drop.style.animationDuration = (0.5 + Math.random()) + 's';
+      drop.style.animationDelay = Math.random() * 5 + 's';
+      drop.style.height = (10 + Math.random() * 20) + 'px';
+      drop.style.opacity = 0.2 + Math.random() * 0.5;
+      rainContainer.appendChild(drop);
+    }
+
+    const audio = document.getElementById('bg-music');
+    const startMessage = document.getElementById('start-message');
+
+    function startMusic() {
+      audio.play().catch(() => {});
+      startMessage.style.display = 'none';
+      document.body.removeEventListener('click', startMusic);
+    }
+
+    document.body.addEventListener('click', startMusic);
+  </script>
+</body>
+</html>
+
+
+
